@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>distributed_transaction</artifactId>
+    <artifactId>atomikos-mybatis</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>distributed_transaction</name>
+    <name>atomikos-mybatis</name>
     <description>Spring Boot分布式事务</description>
 
     <properties>

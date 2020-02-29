@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
@@ -22,12 +23,21 @@ import javax.sql.DataSource;
 @MapperScan(basePackages = "com.example.mapper.db2", sqlSessionFactoryRef = "db2SqlSessionFactory")
 public class DB2DataSourcesConfig {
 
+    @Value("${spring.datasource.db2.jdbc-url}")
+    private String url;
+
+    @Value("${spring.datasource.db2.username}")
+    private String username;
+
+    @Value("${spring.datasource.db2.password}")
+
+    private String password;
     @Bean(name = "db2DataSource")
-    public DataSource dataSource(DB2Config db2DBConfig) {
+    public DataSource dataSource() {
         MysqlXADataSource mysqlXADataSource = new MysqlXADataSource();
-        mysqlXADataSource.setUrl(db2DBConfig.getUrl_jdbc());
-        mysqlXADataSource.setUser(db2DBConfig.getUsername());
-        mysqlXADataSource.setPassword(db2DBConfig.getPassword());
+        mysqlXADataSource.setUrl(url);
+        mysqlXADataSource.setUser(username);
+        mysqlXADataSource.setPassword(password);
         mysqlXADataSource.setPinGlobalTxToPhysicalConnection(true);
 
         AtomikosDataSourceBean atomikosDataSourceBean = new AtomikosDataSourceBean();
